@@ -11,6 +11,8 @@ public class StringUtil {
         int pos = -1;
         if (expression.indexOf("+") > 0) {
             pos = expression.indexOf("+");
+        } else if (expression.indexOf("-") == 0 && expression.indexOf("-",1)>0) {
+            pos = expression.indexOf("-",1);
         } else if (expression.indexOf("-") > 0) {
             pos = expression.indexOf("-");
         } else if (expression.indexOf("/") > 0) {
