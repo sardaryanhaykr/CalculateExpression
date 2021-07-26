@@ -3,7 +3,7 @@ package util;
 /**
  * Created by Hayk on 24.07.2021.
  */
-public class StringUtil {
+public final class StringUtil {
     private StringUtil() {
     }
 

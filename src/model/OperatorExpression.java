@@ -1,24 +1,40 @@
+package model;
+
+import model.ValueExpreession;
 import util.StringUtil;
 
 /**
  * Created by Hayk on 24.07.2021.
  */
 public class OperatorExpression implements Expression {
-    private char operator;
-    private String expression;
+
+    private final String expression;
     private ValueExpreession expreessionL;
     private ValueExpreession expreessionR;
-
+    private Operator operator;
 
     OperatorExpression(String expression) {
         this.expression = expression;
-        setOperator();
+        setOperator(expression.charAt(StringUtil.posOperator(expression)));
         setExpreessionL();
         setExpreessionR();
     }
 
-    private void setOperator() {
-        this.operator = expression.charAt(StringUtil.posOperator(expression));
+    private void setOperator(char s) {
+        switch (s) {
+            case '+':
+                this.operator = Operator.PLUS;
+                break;
+            case '-':
+                this.operator = Operator.MINUS;
+                break;
+            case '*':
+                this.operator = Operator.MULTIPLY;
+                break;
+            case '/':
+                this.operator = Operator.DIVIDE;
+                break;
+        }
     }
 
     private void setExpreessionL() {
@@ -37,15 +53,15 @@ public class OperatorExpression implements Expression {
     @Override
     public double calculate() {
         switch (this.operator) {
-            case '*':
+            case MULTIPLY:
                 return expreessionL.calculate() * expreessionR.calculate();
 
-            case '/': {
+            case DIVIDE: {
                 return expreessionL.calculate() / expreessionR.calculate();
             }
 
-            case '+':
-            case '-': {
+            case PLUS:
+            case MINUS: {
                 return expreessionL.calculate() + expreessionR.calculate();
             }
         }
